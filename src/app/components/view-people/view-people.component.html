@@ -1,0 +1,94 @@
+<div class="container-scroller">
+  <!-- partial:partials/_navbar.html -->
+  <nav class="navbar default-layout col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
+    <div class="text-center navbar-brand-wrapper d-flex align-items-top justify-content-center">
+      <a class="navbar-brand brand-logo" routerLink="/home">
+        <img src="../assets/images/logo.svg" alt="logo" />
+      </a>
+      <a class="navbar-brand brand-logo-mini" routerLink="/home">
+        <img src="../assets/images/logo-mini.svg" alt="logo" /> </a>
+    </div>
+    <div class="navbar-menu-wrapper d-flex align-items-center">
+      <ul class="navbar-nav">
+        <li class="nav-item font-weight-semibold d-none d-lg-block"></li>
+      </ul>
+      <form class="ml-auto search-form d-none d-md-block" action="#">
+        <div class="form-group">
+          <input type="search" class="form-control" placeholder="Búscar...">
+        </div>
+      </form>
+      <ul class="navbar-nav ml-auto">
+        <li class="nav-item dropdown d-none d-xl-inline-block user-dropdown">
+          <a class="nav-link dropdown-toggle" id="UserDropdown" href="#" data-toggle="dropdown" aria-expanded="false">
+            <img class="img-xs rounded-circle" src="../assets/images/faces/face8.jpg" alt="Profile image"> </a>
+          <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="UserDropdown">
+            <div class="dropdown-header text-center">
+              <img class="img-md rounded-circle" src="../assets/images/faces/face8.jpg" alt="Profile image">
+              <p class="mb-1 mt-3 font-weight-semibold">Allen Moreno</p>
+              <p class="font-weight-light text-muted mb-0">allenmoreno@gmail.com</p>
+            </div>
+            <a class="dropdown-item">Perfil <span class="badge badge-pill badge-danger">1</span><i class="dropdown-item-icon ti-dashboard"></i></a>
+            <a class="dropdown-item">Salir<i class="dropdown-item-icon ti-power-off"></i></a>
+          </div>
+        </li>
+      </ul>
+      <button class="navbar-toggler navbar-toggler-right d-lg-none align-self-center" type="button" data-toggle="offcanvas">
+        <span class="mdi mdi-menu"></span>
+      </button>
+    </div>
+  </nav>
+  <!-- partial -->
+  <div class="container-fluid page-body-wrapper">
+    <!-- sidebar -->
+    <app-sidebar></app-sidebar>
+    <!-- sidebar -->
+    <div class="main-panel">
+      <div class="content-wrapper">
+        <div class="row page-title-header">
+          <div class="col-md-12">
+            <div class="page-header-toolbar">
+              <div class="sort-wrapper">
+                <a class="toolbar-item" routerLink="/people"> <i class="fa fa-mail-reply"></i> Volver a la lista</a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12 grid-margin stretch-card">
+            <div class="card">
+              <div class="card-body" *ngIf="people">
+                <div class="d-flex align-items-center pb-2">
+                  <div class="dot-indicator bg-success mr-2"></div>
+                  <p class="mb-0">Usuario Activo</p>
+                </div>
+                <h3 class="card-title font-weight-semibold"><strong>{{people.name}}</strong></h3>
+                <div class="d-flex mt-3 py-2 border-bottom">
+                  <img class="img-lg rounded-circle" *ngIf="people.image" src="{{urlMedia}}{{people.image}}" alt="{{people.name}}">
+                  <img class="img-lg rounded-circle" *ngIf="!people.image" src="../assets/images/faces/face3.jpg" alt="{{people.name}}">
+                  <div class="wrapper ml-4">
+                    <small>{{people.createdAt | date:'dd/MM/yyyy H:m:s a'}}</small>
+                    <p class="mb-n1 font-weight-semibold">{{people.email}}</p>
+                    <p class="mb-n1 font-weight-semibold">{{people.phone}}</p>
+                  </div>
+                </div>
+                <div class="d-flex mt-3 py-2 border-bottom">
+                  <div class="wrapper ml-2">
+                    <p class="mb-n1 font-weight-semibold">{{people.biography}}</p>
+                  </div>
+                </div>
+                <br>
+                <a class="btn btn-primary mr-2" [routerLink]="['/edit', people.id]">Actualizar mis datos</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- content-wrapper ends -->
+      <!-- footer -->
+      <app-footer></app-footer>
+      <!-- footer -->
+    </div>
+    <!-- main-panel ends -->
+  </div>
+  <!-- page-body-wrapper ends -->
+</div>

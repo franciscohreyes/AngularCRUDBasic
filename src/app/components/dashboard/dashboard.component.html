@@ -1,0 +1,113 @@
+<div class="container-scroller">
+  <!-- partial:partials/_navbar.html -->
+  <nav class="navbar default-layout col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
+    <div class="text-center navbar-brand-wrapper d-flex align-items-top justify-content-center">
+      <a class="navbar-brand brand-logo" routerLink="/dashboard">
+        CRUDBASIC
+      </a>
+      <a class="navbar-brand brand-logo-mini" routerLink="/dashboard">
+        CRUDBASIC
+      </a>
+    </div>
+    <div class="navbar-menu-wrapper d-flex align-items-center">
+      <ul class="navbar-nav">
+        <li class="nav-item font-weight-semibold d-none d-lg-block"></li>
+      </ul>
+      <form class="ml-auto search-form d-none d-md-block" action="#">
+        <div class="form-group">
+          <input type="search" class="form-control" placeholder="Búscar...">
+        </div>
+      </form>
+      <ul class="navbar-nav ml-auto">
+        <li class="nav-item dropdown d-none d-xl-inline-block user-dropdown">
+          <a class="nav-link dropdown-toggle" id="UserDropdown" href="#" data-toggle="dropdown" aria-expanded="false">
+            <img class="img-xs rounded-circle" src="../assets/images/faces/face8.jpg" alt="Profile image"> </a>
+          <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="UserDropdown">
+            <div class="dropdown-header text-center">
+              <img class="img-md rounded-circle" src="../assets/images/faces/face8.jpg" alt="Profile image">
+              <p class="mb-1 mt-3 font-weight-semibold">Allen Moreno</p>
+              <p class="font-weight-light text-muted mb-0">allenmoreno@gmail.com</p>
+            </div>
+            <a class="dropdown-item">Perfil <span class="badge badge-pill badge-danger">1</span><i class="dropdown-item-icon ti-dashboard"></i></a>
+            <a class="dropdown-item">Salir<i class="dropdown-item-icon ti-power-off"></i></a>
+          </div>
+        </li>
+      </ul>
+      <button class="navbar-toggler navbar-toggler-right d-lg-none align-self-center" type="button" data-toggle="offcanvas">
+        <span class="mdi mdi-menu"></span>
+      </button>
+    </div>
+  </nav>
+  <!-- partial -->
+  <div class="container-fluid page-body-wrapper">
+    <!-- sidebar -->
+    <app-sidebar></app-sidebar>
+    <!-- sidebar -->
+    <div class="main-panel">
+      <div class="content-wrapper">
+        <div class="row page-title-header">
+          <div class="col-md-12">
+            <div class="page-header-toolbar">
+              <div class="sort-wrapper">
+                <a class="btn btn-primary toolbar-item" routerLink="/people">Ir a la lista</a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6 grid-margin stretch-card">
+            <div class="card">
+              <div class="card-body">
+                <div class="d-flex justify-content-between">
+                  <h4 class="card-title mb-0">Total Activos</h4>
+                </div>
+                <h3 class="mb-0 font-weight-semibold text-success" *ngIf="totalActive">{{totalActive.totalActive}}</h3>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6 grid-margin stretch-card">
+            <div class="card">
+              <div class="card-body">
+                <div class="d-flex justify-content-between">
+                  <h4 class="card-title mb-0">Total Inactivos</h4>
+                </div>
+                <h3 class="mb-0 font-weight-semibold text-danger" *ngIf="totalInactive">{{totalInactive.totalInactive}}</h3>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12 grid-margin stretch-cards" *ngIf="activity && activity.length == 0">
+            <app-empty-data></app-empty-data>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-4 grid-margin stretch-card" *ngIf="activity && activity.length >0">
+            <div class="card">
+              <div class="card-body">
+                <h4 class="card-title mb-0"><i class="fa fa-list-alt"></i> Actividad Reciente</h4>
+                <div class="d-flex py-2 border-bottom" *ngFor="let item of activity | slice:0:10; let i=index;">
+                  <div class="wrapper">
+                    <small class="text-muted">{{item.createdAt | date:'dd-MM-yyyy hh:mm:ss a'}}</small><br>
+                    <small class="text-muted" *ngIf="item.type == 'create'"><i class="fa fa-plus"></i> Alta</small>
+                    <small class="text-muted" *ngIf="item.type == 'edit'"><i class="fa fa-edit"></i> Edición</small>
+                    <small class="text-muted" *ngIf="item.type == 'delete'"><i class="fa fa-trash-o"></i> Baja</small>
+                    <p class="font-weight-semibold text-gray mb-0">{{item.message}}</p>
+                  </div>
+                  <small class="text-muted ml-auto" (click)="deleteActivity(item.id)" style="cursor: pointer; color:red !important; font-size: 20px !important;"><i class="fa fa-trash-o"></i></small>
+                </div>
+                <a class="d-block mt-5" href="#">Ver todo</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- content-wrapper ends -->
+      <!-- footer -->
+      <app-footer></app-footer>
+      <!-- footer -->
+    </div>
+    <!-- main-panel ends -->
+  </div>
+  <!-- page-body-wrapper ends -->
+</div>
